@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['bookstore_data'])) {
-    $_SESSION['bookstore_data'] = [];
+if (!isset($_SESSION['kwitansi_data'])) {
+    $_SESSION['kwitansi_data'] = [];
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -16,9 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'keterangan' => $_POST['keterangan']
         ];
 
-        array_push($_SESSION['bookstore_data'], $data);
-        $jsonData = json_encode($_SESSION['bookstore_data'], JSON_PRETTY_PRINT);
-        file_put_contents('bookstore_data.json', $jsonData);
+        array_push($_SESSION['kwitansi_data'], $data);
+        $jsonData = json_encode($_SESSION['kwitansi_data'], JSON_PRETTY_PRINT);
+        file_put_contents('kwitansi_data.json', $jsonData);
 
         $_SESSION['success_message'] = "Data berhasil disimpan!";
         
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Store System</title>
+    <title>Kwitansi</title>
     <style>
         * {
             box-sizing: border-box;
@@ -158,8 +158,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($_SESSION['error_message']);
         }
         ?>
-        <h2>Form Book Store</h2>
-        <form id="bookstoreForm" method="POST">
+        <h2>Form Kwitansi</h2>
+        <form id="Form Kwitansi" method="POST">
             <div class="form-group">
                 <label>Nama Lengkap:</label>
                 <input type="text" name="nama" required
@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label>Tanggal Bayar:</label>
-                <input type="date" name="tanggal" required
+                <input type="date" name="tanggal" id="tanggalBayar" required
                     value="<?= isset($_POST['tanggal']) ? htmlspecialchars($_POST['tanggal']) : '' ?>">
             </div>
 
@@ -217,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">Submit</button>
         </form>
 
-        <h2>Data Book Store</h2>
+        <h2>Data Kwitansi</h2>
         <table>
             <thead>
                 <tr>
@@ -232,7 +232,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </thead>
             <tbody>
                 <?php
-                $jsonFile = 'bookstore_data.json';
+                $jsonFile = 'kwitansi_data.json';
                 $data = file_exists($jsonFile) ? json_decode(file_get_contents($jsonFile), true) : [];
 
                 $no = 1;
@@ -254,6 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script>
         let captchaResult;
+        document.getElementById("tanggalBayar").valueAsDate = new Date();
 
         function generateCaptcha() {
             const num1 = Math.floor(Math.random() * 20) + 1;
@@ -290,7 +291,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Generate initial captcha
         generateCaptcha();
 
-        document.getElementById('bookstoreForm').addEventListener('submit', function (e) {
+        document.getElementById('Form Kwitansi').addEventListener('submit', function (e) {
             const total = document.querySelector('input[name="total"]').value;
             const userAnswer = document.getElementById('captchaAnswer').value;
 
