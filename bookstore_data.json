@@ -1,0 +1,26 @@
+[
+    {
+        "nama": "test2",
+        "tanggal": "1000-10-10",
+        "kelas": "X",
+        "jurusan": "REKAYASA PERANGKAT LUNAK",
+        "total": "10000",
+        "keterangan": "bayaran"
+    },
+    {
+        "nama": "sasa",
+        "tanggal": "8989-09-08",
+        "kelas": "X",
+        "jurusan": "REKAYASA PERANGKAT LUNAK",
+        "total": "100000",
+        "keterangan": "sasasa"
+    },
+    {
+        "nama": "sasa",
+        "tanggal": "2323-02-12",
+        "kelas": "X",
+        "jurusan": "REKAYASA PERANGKAT LUNAK",
+        "total": "10000",
+        "keterangan": "sehat"
+    }
+]
